@@ -3,31 +3,34 @@
 
 int main() 
 {
-
-
     char item[50];
-    float price;
+    float price, subtotal, discount, gst, total;
     int quantity;
     char currency = '$';
-    float total;
 
-    printf("What item would you like to buy? : ");
+    printf("Enter item name: ");
     fgets(item, sizeof(item), stdin);
-
     item[strcspn(item, "\n")] = '\0';
 
-    printf("How much is the item each? : ");
+    printf("Enter price per item: ");
     scanf("%f", &price);
 
-    printf("How many would you like to buy? : ");
+    printf("Enter quantity: ");
     scanf("%d", &quantity);
 
-    total = price * quantity;
+    subtotal = price * quantity;
+    discount = subtotal * 0.10; 
+    subtotal -= discount;
+    gst = subtotal * 0.18;
+    total = subtotal + gst;
 
-    printf("\n----- BILL -----\n");
-    printf("Item      : %s\n", item);
-    printf("Quantity  : %d\n", quantity);
-    printf("Total     : %c%.2f\n", currency, total);
+    printf("\n------ BILL ------\n");
+    printf("Item       : %s\n", item);
+    printf("Quantity   : %d\n", quantity);
+    printf("Discount   : $%.2f\n", discount);
+    printf("GST (18%%)  : $%.2f\n", gst);
+    printf("------------------\n");
+    printf("TOTAL      : $%.2f\n", total);
 
     return 0;
 }
